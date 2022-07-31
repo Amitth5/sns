@@ -10,7 +10,18 @@ var con = mysql.createConnection({
     password: "x31748Amit$",
     database :"sweetand_spice_db",
   });
-  
+
+
+  const express = require('express')
+const app = express()
+
+app.get('/', function (req, res) {
+  res.send('Hello World')
+})
+
+app.listen(3000)
+
+
   con.connect(function(err) {
     if (err) throw err;
     con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = CURDATE() AND orderstatus_id = 5", function (err, result, fields) {
@@ -56,10 +67,6 @@ var con = mysql.createConnection({
         console.log("Total Incentives Distributed: "+ totalIncentives);
 
         console.log("Total Profit after deducting Incentive: "+ parseInt(totalStoreOrderValue) - parseInt(totalIncentives) );
-
-
-          
-
 
       });
   });
