@@ -13,17 +13,34 @@ var con = mysql.createConnection({
 
 
   const express = require('express')
-const app = express()
+  var app = express();
+  app.set('views', './views');
+  // set the view engine to ejs
+  app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
-  res.send('Hello World')
+
+    transactionCalculate()
+    .then((data)=>{
+        res.render('index', {"data": data})
+    })
+    .catch((err)=>{
+        res.send(err);
+    })
 })
 
 app.listen(80)
 
+con.connect(function(err) {
 
-  con.connect(function(err) {
-    if (err) throw err;
+});
+
+
+function transactionCalculate(){
+
+    return new Promise((resolve, reject) => {
+
+ 
     con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = CURDATE() AND orderstatus_id = 5", function (err, result, fields) {
         if (err) throw err;
         console.log("Total Number of Orders Delivered :" + result.length);
@@ -68,8 +85,52 @@ app.listen(80)
 
         console.log("Total Profit after deducting Incentive: "+ parseInt(totalStoreOrderValue) - parseInt(totalIncentives) );
 
-      });
+        resolve({
+            "totalOrder": result.length,
+            "totalOrderValue" : result.reduce((s, f) => s + f.total, 0),
+            "totalStoreOrderValue": totalStoreOrderValue,
+            "totalDeliveryCharge": result.reduce((s, f) => s + f.actual_delivery_charge, 0),
+            "deliveryDetails": [
+                {
+                "name": "sunil",
+                "id":1551,
+                "orderCount": sunilOrdersCount,
+                "incentive": Math.floor(sunilOrdersCount/10) *50
+                },
+                {
+                    "name": "subhash",
+                    "id":1697,
+                    "orderCount": subashOrdersCount,
+                    "incentive": Math.floor(subashOrdersCount/10) *50
+                },
+                {
+                    "name": "Shinde",
+                    "id":1521,
+                    "orderCount": shindeOrdersCount,
+                    "incentive": 0
+                },
+                {
+                    "name": "Rahul Parmar",
+                    "id":1084,
+                    "orderCount": parmarShetOrdersCount,
+                    "incentive": Math.floor(parmarShetOrdersCount/10) *50
+                },
+
+                {
+                    "name": "Sameer Saase",
+                    "id":885,
+                    "orderCount": sameerOrdersCount,
+                    "incentive": Math.floor(sameerOrdersCount/10) *50
+                },
+            ],
+            "totalIncentives": totalIncentives,
+            "totalOrderExpense": result.length *5
+        })
+
+
   });
+});
+}
 
 
 
