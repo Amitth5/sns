@@ -77,7 +77,7 @@ function transactionCalculate(){
         
 
         // sameer Total Online Orders. 1084
-        let sameerOrders = _.where(result, {user_id: 885}).length;
+        let sameerOrders = _.where(result, {user_id: 885});
         let sameerOrdersCount = sameerOrders.length;
         console.log("Sameer Orders Count: "+ sameerOrdersCount);
         console.log("Total Incentives Distributed: "+ totalIncentives);
