@@ -64,18 +64,21 @@ function transactionCalculate(){
         totalIncentives =  totalIncentives + Math.floor(subashOrdersCount/20) *50;
 
         // Shinde Total Online Orders. 1521
-        let shindeOrdersCount = _.where(result, {user_id: 1521}).length;
+        let shindeOrders = _.where(result, {user_id: 1521});
+        let shindeOrdersCount = shindeOrders.length;
         console.log("Shinde Orders Count: "+ shindeOrdersCount);
 
 
         // Parmar Total Online Orders. 1084
-        let parmarShetOrdersCount = _.where(result, {user_id: 1084}).length;
+        let parmarShetOrders = _.where(result, {user_id: 1084});
+        let parmarShetOrdersCount = parmarShetOrders.length;
         console.log("Parmar Shet Orders Count: "+ parmarShetOrdersCount);
         console.log("Parmar Shet Incentive: "+  Math.floor(parmarShetOrdersCount/10) *50);
         
 
         // sameer Total Online Orders. 1084
-        let sameerOrdersCount = _.where(result, {user_id: 885}).length;
+        let sameerOrders = _.where(result, {user_id: 885}).length;
+        let sameerOrdersCount = sameerOrders.length;
         console.log("Sameer Orders Count: "+ sameerOrdersCount);
         console.log("Total Incentives Distributed: "+ totalIncentives);
         console.log("Total Profit after deducting Incentive: "+ parseInt(totalStoreOrderValue) - parseInt(totalIncentives) );
@@ -100,13 +103,12 @@ function transactionCalculate(){
                 "orderCount": sunilOrdersCount,
                 "incentive": Math.floor(sunilOrdersCount/20) *50,
                 "COD": sunilOrders.reduce((s, f) => s + f.total, 0),
-                "Delivery Charges": sunilOrders.reduce((s, f) => { 
-                    let delivery_charge = f.actual_delivery_charge;
-                    if(f.actual_delivery_charge <30){
-                        delivery_charge = 30;
+                "Delivery Charges": sunilOrders.reduce(function(s, f) { 
+                    if(f.actual_delivery_charge < 30){
+                        f.actual_delivery_charge = 30;
                     }
-                    return s + delivery_charge
-                    , 0})
+                    return s + f.actual_delivery_charge  
+                }, 0)
                 },
                 {
                     "name": "subhash",
@@ -114,25 +116,38 @@ function transactionCalculate(){
                     "orderCount": subashOrdersCount,
                     "incentive": Math.floor(subashOrdersCount/20) *50,
                     "COD": subashOrders.reduce((s, f) => s + f.total, 0),
-                    "Delivery Charges": subashOrders.reduce((s, f) => { 
-                        let delivery_charge = f.actual_delivery_charge;
+                    "Delivery Charges": subashOrders.reduce(function(s, f) { 
                         if(f.actual_delivery_charge < 30){
-                            delivery_charge = 30;
+                            f.actual_delivery_charge = 30;
                         }
-                        return s + delivery_charge
-                        , 0}),
+                        return s + f.actual_delivery_charge  
+                    }, 0),
                 },
                 {
                     "name": "Shinde",
                     "id":1521,
                     "orderCount": shindeOrdersCount,
-                    "incentive": 0
+                    "incentive": 0,
+                    "COD": subhashOrders.reduce((s, f) => s + f.total, 0),
+                    "Delivery Charges": subhashOrders.reduce(function(s, f) { 
+                        if(f.actual_delivery_charge < 30){
+                            f.actual_delivery_charge = 30;
+                        }
+                        return s + f.actual_delivery_charge  
+                    }, 0),
                 },
                 {
                     "name": "Rahul Parmar",
                     "id":1084,
                     "orderCount": parmarShetOrdersCount,
-                    "incentive": Math.floor(parmarShetOrdersCount/20) *50
+                    "incentive": Math.floor(parmarShetOrdersCount/20) *50,
+                    "COD": parmarShetOrders.reduce((s, f) => s + f.total, 0),
+                    "Delivery Charges": parmarShetOrders.reduce(function(s, f) { 
+                        if(f.actual_delivery_charge < 30){
+                            f.actual_delivery_charge = 30;
+                        }
+                        return s + f.actual_delivery_charge  
+                    }, 0),
                 },
 
                 {
@@ -140,14 +155,18 @@ function transactionCalculate(){
                     "id":885,
                     "orderCount": sameerOrdersCount,
                     "incentive": 0,
-                    "COD": 0
+                    "COD": sameerOrders.reduce((s, f) => s + f.total, 0),
+                    "Delivery Charges": sameerOrders.reduce(function(s, f) { 
+                        if(f.actual_delivery_charge < 30){
+                            f.actual_delivery_charge = 30;
+                        }
+                        return s + f.actual_delivery_charge  
+                    }, 0),
                 },
             ],
             "totalIncentives": totalIncentives,
             "totalOrderExpense": result.length *5
         })
-
-
   });
 });
 }
