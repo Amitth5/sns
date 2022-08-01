@@ -31,13 +31,13 @@ app.get('/', function (req, res) {
 
 app.listen(80)
 
-
+con.connect(function(err) {
+});
 
 
 function transactionCalculate(){
     return new Promise((resolve, reject) => {
     con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = CURDATE() AND orderstatus_id = 5", function (err, result, fields) {
-        con.connect(function(err) {
 
         if (err) throw err;
 
@@ -172,7 +172,6 @@ function transactionCalculate(){
         })
   });
   
-});
 });
 }
 
