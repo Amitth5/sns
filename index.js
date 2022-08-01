@@ -128,8 +128,8 @@ function transactionCalculate(){
                     "id":1521,
                     "orderCount": shindeOrdersCount,
                     "incentive": 0,
-                    "COD": subhashOrders.reduce((s, f) => s + f.total, 0),
-                    "Delivery Charges": subhashOrders.reduce(function(s, f) { 
+                    "COD": shindeOrders.reduce((s, f) => s + f.total, 0),
+                    "Delivery Charges": shindeOrders.reduce(function(s, f) { 
                         if(f.actual_delivery_charge < 30){
                             f.actual_delivery_charge = 30;
                         }
