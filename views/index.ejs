@@ -5,7 +5,7 @@
 <%= JSON.stringify(data) %>
 
 <div class="container">
-<div class="fluid">
+<div class="row">
     <div class="card text-white bg-primary mb-3" style="max-width: 18rem;float:left !important; margin-left: 15px;">
         <div class="card-header"><h1><%= data.totalOrder %></h1>  </div>
         <div class="card-body">
@@ -57,7 +57,6 @@
           <h5 class="card-title"><b> Total Incentive </b>: <%= data.deliveryDetails[1]['incentive'] %></h5>
         </div>
       </div>
-      <div class="card bg-light mb-3" style="max-width: 18rem;">
         <div class="card text-white bg-warning mb-3" style="max-width: 18rem; float:left !important; margin-left: 15px;">
             <div class="card-header"><h2> Sauransh Shinde Details</h2></div>
             <div class="card-body">
@@ -67,8 +66,6 @@
               <h5 class="card-title"><b> Total Incentive </b>: <%= data.deliveryDetails[2]['incentive'] %></h5>
             </div>
           </div>
-      </div>
-      <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
         <div class="card text-white bg-warning mb-3" style="max-width: 18rem; float:left !important; margin-left: 15px;">
             <div class="card-header"><h2> Rahul Parmar Details</h2></div>
             <div class="card-body">
@@ -78,9 +75,7 @@
               <h5 class="card-title"><b> Total Incentive </b>: <%= data.deliveryDetails[3]['incentive'] %></h5>
             </div>
           </div>
-      </div>
 
-      <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
         <div class="card text-white bg-warning mb-3" style="max-width: 18rem; float:left !important; margin-left: 15px;">
             <div class="card-header"><h2> Sameer Details</h2></div>
             <div class="card-body">
@@ -90,6 +85,5 @@
               <h5 class="card-title"><b> Total Incentive </b>: <%= data.deliveryDetails[4]['incentive'] %></h5>
             </div>
           </div>
-      </div>
     </div>
 </div>
