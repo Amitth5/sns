@@ -79,7 +79,9 @@ function transactionCalculate(){
         console.log("Sameer Orders Count: "+ sameerOrdersCount);
         console.log("Total Incentives Distributed: "+ totalIncentives);
         console.log("Total Profit after deducting Incentive: "+ parseInt(totalStoreOrderValue) - parseInt(totalIncentives) );
-        let sunilDeliveryCharges =  sunilOrders.reduce((s, f) => { s + f.actual_delivery_charge, 0});
+        let sunilDeliveryCharges =  sunilOrders.reduce((s, f) => { 
+            console.log(f)
+            , 0});
         console.log(sunilDeliveryCharges);
 
         resolve({
