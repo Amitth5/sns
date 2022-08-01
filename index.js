@@ -81,8 +81,8 @@ function transactionCalculate(){
         console.log("Total Profit after deducting Incentive: "+ parseInt(totalStoreOrderValue) - parseInt(totalIncentives) );
         let sunilDeliveryCharges =  sunilOrders.reduce((s, f) => { 
             let delivery_charge = f.actual_delivery_charge;
-            console.log(s + delivery_charge);
-            if(f.actual_delivery_charge <30){
+            console.log(s , f.actual_delivery_charge);
+            if(f.actual_delivery_charge < 30){
                 console.log("30")
                 delivery_charge = 30;
             }
