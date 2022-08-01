@@ -79,6 +79,8 @@ function transactionCalculate(){
         console.log("Sameer Orders Count: "+ sameerOrdersCount);
         console.log("Total Incentives Distributed: "+ totalIncentives);
         console.log("Total Profit after deducting Incentive: "+ parseInt(totalStoreOrderValue) - parseInt(totalIncentives) );
+        let sunilDeliveryCharges =  sunilOrders.reduce((s, f) => { s + f.actual_delivery_charge, 0});
+        console.log(sunilDeliveryCharges);
 
         resolve({
             "totalOrder": result.length,
@@ -92,11 +94,7 @@ function transactionCalculate(){
                 "orderCount": sunilOrdersCount,
                 "incentive": Math.floor(sunilOrdersCount/20) *50,
                 "COD": sunilOrders.reduce((s, f) => s + f.total, 0),
-                "Delivery Charges": sunilOrders.reduce((s, f) => { 
-                 
-                    s + f.actual_delivery_charge
-                    
-                    , 0}),
+                "Delivery Charges": 200
                 },
                 {
                     "name": "subhash",
