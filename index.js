@@ -93,9 +93,7 @@ function transactionCalculate(){
                 "incentive": Math.floor(sunilOrdersCount/20) *50,
                 "COD": sunilOrders.reduce((s, f) => s + f.total, 0),
                 "Delivery Charges": sunilOrders.reduce((s, f) => { 
-                    if(f.actual_delivery_charge<30){
-                        f.actual_delivery_charge = 30;
-                    }
+                 
                     s + f.actual_delivery_charge
                     
                     , 0}),
