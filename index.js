@@ -31,21 +31,19 @@ app.get('/', function (req, res) {
 
 app.listen(80)
 
-con.connect(function(err) {
 
-});
 
 
 function transactionCalculate(){
-
     return new Promise((resolve, reject) => {
-
- 
     con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = CURDATE() AND orderstatus_id = 5", function (err, result, fields) {
+        con.connect(function(err) {
+
         if (err) throw err;
 
         let totalStoreOrderValue = result.reduce((s, f) => s + f.sub_total, 0);
         let totalIncentives = 0;
+        let totalDeductionFromDeliveryCharges = 0;
 
         // Sunil Total Online Orders. 1551
         let sunilOrders = _.where(result, {user_id: 1551});
@@ -105,6 +103,7 @@ function transactionCalculate(){
                 "COD": sunilOrders.reduce((s, f) => s + f.total, 0),
                 "Delivery Charges": sunilOrders.reduce(function(s, f) { 
                     if(f.actual_delivery_charge < 30){
+                        totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
                         f.actual_delivery_charge = 30;
                     }
                     return s + f.actual_delivery_charge  
@@ -118,6 +117,7 @@ function transactionCalculate(){
                     "COD": subashOrders.reduce((s, f) => s + f.total, 0),
                     "Delivery Charges": subashOrders.reduce(function(s, f) { 
                         if(f.actual_delivery_charge < 30){
+                            totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
                             f.actual_delivery_charge = 30;
                         }
                         return s + f.actual_delivery_charge  
@@ -131,6 +131,7 @@ function transactionCalculate(){
                     "COD": shindeOrders.reduce((s, f) => s + f.total, 0),
                     "Delivery Charges": shindeOrders.reduce(function(s, f) { 
                         if(f.actual_delivery_charge < 30){
+                            totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
                             f.actual_delivery_charge = 30;
                         }
                         return s + f.actual_delivery_charge  
@@ -144,6 +145,7 @@ function transactionCalculate(){
                     "COD": parmarShetOrders.reduce((s, f) => s + f.total, 0),
                     "Delivery Charges": parmarShetOrders.reduce(function(s, f) { 
                         if(f.actual_delivery_charge < 30){
+                            totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
                             f.actual_delivery_charge = 30;
                         }
                         return s + f.actual_delivery_charge  
@@ -158,6 +160,7 @@ function transactionCalculate(){
                     "COD": sameerOrders.reduce((s, f) => s + f.total, 0),
                     "Delivery Charges": sameerOrders.reduce(function(s, f) { 
                         if(f.actual_delivery_charge < 30){
+                            totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
                             f.actual_delivery_charge = 30;
                         }
                         return s + f.actual_delivery_charge  
@@ -165,9 +168,11 @@ function transactionCalculate(){
                 },
             ],
             "totalIncentives": totalIncentives,
-            "totalOrderExpense": result.length *5
+            "totalOrderExpense": totalDeductionFromDeliveryCharges
         })
   });
+  
+});
 });
 }
 
