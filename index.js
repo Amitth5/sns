@@ -80,8 +80,13 @@ function transactionCalculate(){
         console.log("Total Incentives Distributed: "+ totalIncentives);
         console.log("Total Profit after deducting Incentive: "+ parseInt(totalStoreOrderValue) - parseInt(totalIncentives) );
         let sunilDeliveryCharges =  sunilOrders.reduce((s, f) => { 
-            console.log(f)
+            let delivery_charge = f.actual_delivery_charge;
+            if(f.actual_delivery_charge <30){
+                delivery_charge = 30;
+            }
+            return s + delivery_charge
             , 0});
+
         console.log(sunilDeliveryCharges);
 
         resolve({
@@ -96,7 +101,13 @@ function transactionCalculate(){
                 "orderCount": sunilOrdersCount,
                 "incentive": Math.floor(sunilOrdersCount/20) *50,
                 "COD": sunilOrders.reduce((s, f) => s + f.total, 0),
-                "Delivery Charges": 200
+                "Delivery Charges": sunilOrders.reduce((s, f) => { 
+                    let delivery_charge = f.actual_delivery_charge;
+                    if(f.actual_delivery_charge <30){
+                        delivery_charge = 30;
+                    }
+                    return s + delivery_charge
+                    , 0})
                 },
                 {
                     "name": "subhash",
@@ -105,11 +116,11 @@ function transactionCalculate(){
                     "incentive": Math.floor(subashOrdersCount/20) *50,
                     "COD": subashOrders.reduce((s, f) => s + f.total, 0),
                     "Delivery Charges": subashOrders.reduce((s, f) => { 
-                        if(f.actual_delivery_charge<30){
-                            f.actual_delivery_charge = 30;
+                        let delivery_charge = f.actual_delivery_charge;
+                        if(f.actual_delivery_charge <30){
+                            delivery_charge = 30;
                         }
-                        s + f.actual_delivery_charge
-                        
+                        return s + delivery_charge
                         , 0}),
                 },
                 {
