@@ -48,7 +48,7 @@ con.connect(function(err) {
 
 function transactionCalculate(){
     return new Promise((resolve, reject) => {
-    con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = CURDATE()-1 AND orderstatus_id = 5", function (err, result, fields) {
+    con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = CURDATE() AND orderstatus_id = 5", function (err, result, fields) {
 
         if (err) throw err;
 
@@ -195,13 +195,12 @@ function getStoresDetails(){
                 
                 let nisargOrders = _.where(result, {restaurant_id: 15});
                 let nisargOrderDetils = nisargOrders.reduce(function(s, f){ 
-                    let pricePreGst = f.sub_total - (5/100)*f.sub_total;
+                    let pricePreGst = f.sub_total - (10/100)*f.sub_total;
                     let priceAfterComission = pricePreGst - (10/100)*pricePreGst;
                     let actualPriceToPay = priceAfterComission + (5/100)*f.sub_total;
                     return s + actualPriceToPay;               
                 }, 0);
 
-                console.log(nisargOrderDetils);
                 resolve([
                     {"sale":nisargOrderDetils,
                     "orderCount": nisargOrders.length  
