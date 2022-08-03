@@ -179,7 +179,7 @@ function transactionCalculate(){
                 },
             ],
             "totalIncentives": totalIncentives,
-            "totalOrderExpense": totalDeductionFromDeliveryCharges
+            "totalOrderExpense": totalDeductionFromDeliveryCharges + totalIncentives
         })
   });
   
@@ -203,7 +203,8 @@ function getStoresDetails(){
 
                 resolve([
                     {"sale":nisargOrderDetils,
-                    "orderCount": nisargOrders.length  
+                    "orderCount": nisargOrders.length,
+                    "profit": nisargOrders.reduce((s, f) => s + f.sub_total, 0) - nisargOrderDetils
                     }]);
             });
     });
