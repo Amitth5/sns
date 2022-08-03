@@ -99,6 +99,7 @@ function transactionCalculate(){
         }, 0)
 
         console.log(sunilDeliveryCharges);
+        
 
         resolve({
             "totalOrder": result.length,
@@ -124,7 +125,7 @@ function transactionCalculate(){
                     "name": "subhash",
                     "id":1697,
                     "orderCount": subashOrdersCount,
-                    "incentive": Math.floor(subashOrdersCount/20) *50,
+                    "incentive": getIncentive(subashOrdersCount),
                     "COD": subashOrders.reduce((s, f) => s + f.total, 0),
                     "Delivery Charges": subashOrders.reduce(function(s, f) { 
                         if(f.actual_delivery_charge < 30){
@@ -211,4 +212,10 @@ function getStoresDetails(){
 }
 
 
-
+function getIncentive(orderCount){
+    if(orderCount<30){
+    return Math.floor(orderCount/20) *50
+    }else{
+       return 100; 
+    }
+}
