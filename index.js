@@ -192,7 +192,7 @@ function transactionCalculate(){
 function getStoresDetails(){
     return new Promise((resolve, reject) => {
         console.log("Inside getStoreDetails Function");
-            con.query("SELECT * FROM orders WHERE DATE(`created_at`) = CURDATE() - 1 AND orderstatus_id = 5", function (err, result, fields) {
+            con.query("SELECT * FROM orders WHERE DATE(`created_at`) = CURDATE()  AND orderstatus_id = 5", function (err, result, fields) {
                 
                 let nisargOrders = _.where(result, {restaurant_id: 15});
                 let nisargOrderDetils = nisargOrders.reduce(function(s, f){ 
