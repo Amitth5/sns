@@ -54,6 +54,8 @@ con.connect(function(err) {
 
 function transactionCalculate(currDate){
     return new Promise((resolve, reject) => {
+
+        console.log("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = "+ currDate +" AND orderstatus_id = 5");
     con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = "+ currDate +" AND orderstatus_id = 5", function (err, result, fields) {
 
         if (err) throw err;
