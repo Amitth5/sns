@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
 
     let currDate = new Date().toISOString().split('T')[0];
 
-    if(req.query){
+    if(req.query.date){
         console.log('Req query found');
         console.log(req.query);
         currDate = req.query.date;
@@ -58,8 +58,8 @@ con.connect(function(err) {
 function transactionCalculate(currDate){
     return new Promise((resolve, reject) => {
 
-        console.log("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = "+ currDate +" AND orderstatus_id = 5");
-    con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = "+ currDate +" AND orderstatus_id = 5", function (err, result, fields) {
+        console.log("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = '"+ currDate +"' AND orderstatus_id = 5");
+    con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = '"+ currDate +"' AND orderstatus_id = 5", function (err, result, fields) {
 
         if (err) throw err;
 
