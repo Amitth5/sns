@@ -31,7 +31,7 @@ app.get('/', function (req, res) {
     console.log(currDate);
     transactionCalculate(currDate)
     .then((data)=>{
-        res.render('index', {"data": data})
+        res.render('index', {"data": data,"date": currDate})
     })
     .catch((err)=>{
         res.send(err);
