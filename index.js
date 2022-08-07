@@ -20,6 +20,8 @@ var con = mysql.createConnection({
 
 app.get('/', function (req, res) {
 
+    console.log(req.query);
+    console.log(req.params);
     transactionCalculate()
     .then((data)=>{
         res.render('index', {"data": data})
