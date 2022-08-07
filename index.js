@@ -20,7 +20,7 @@ var con = mysql.createConnection({
 
 app.get('/', function (req, res) {
 
-    let currDate = `CURDATE()`;
+    let currDate = new Date().toISOString().split('T')[0];
 
     if(req.query){
         currDate = req.query.date;
