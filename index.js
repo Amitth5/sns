@@ -26,6 +26,7 @@ app.get('/', function (req, res) {
         currDate = req.query.date;
     }
 
+    console.log(currDate);
     transactionCalculate(currDate)
     .then((data)=>{
         res.render('index', {"data": data})
