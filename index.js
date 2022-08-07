@@ -23,6 +23,8 @@ app.get('/', function (req, res) {
     let currDate = new Date().toISOString().split('T')[0];
 
     if(req.query){
+        console.log('Req query found');
+        console.log(req.query);
         currDate = req.query.date;
     }
 
