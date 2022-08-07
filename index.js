@@ -20,8 +20,12 @@ var con = mysql.createConnection({
 
 app.get('/', function (req, res) {
 
-    console.log(req.query);
-    console.log(req.params);
+    let currDate = CURDATE();
+
+    if(req.query){
+        currDate = req.query.date;
+    }
+
     transactionCalculate()
     .then((data)=>{
         res.render('index', {"data": data})
@@ -50,7 +54,7 @@ con.connect(function(err) {
 
 function transactionCalculate(){
     return new Promise((resolve, reject) => {
-    con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = CURDATE() AND orderstatus_id = 5", function (err, result, fields) {
+    con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = "+ currDate +" AND orderstatus_id = 5", function (err, result, fields) {
 
         if (err) throw err;
 
