@@ -121,7 +121,6 @@ function transactionCalculate(currDate){
             return s + f.actual_delivery_charge  
         }, 0)
 
-        console.log(sunilDeliveryCharges);
         let sunilDeliveryCharges =  sunilOrders.reduce(function(s, f) { 
             if(f.actual_delivery_charge < 30){
                 f.actual_delivery_charge = 30;
