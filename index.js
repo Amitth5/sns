@@ -110,6 +110,15 @@ function transactionCalculate(currDate){
         let krishnaOrdersCount = sameerOrders.length;
 
 
+        //Shree
+        let shreeOrders = _.where(result, {user_id: 2381});
+        let shreeOrdersCount = shreeOrders.length;
+        totalIncentives =  totalIncentives + Math.floor(shreeOrdersCount/20) *50;
+
+
+
+
+
         console.log("Krishna Orders Count: "+ krishnaOrdersCount);
         console.log("Total Incentives Distributed: "+ totalIncentives);
         console.log("Total Profit after deducting Incentive: "+ parseInt(totalStoreOrderValue) - parseInt(totalIncentives) );
@@ -214,6 +223,20 @@ function transactionCalculate(currDate){
                     "incentive": 0,
                     "COD": krishnaOrders.reduce((s, f) => s + f.total, 0),
                     "Delivery Charges": krishnaOrders.reduce(function(s, f) { 
+                        if(f.actual_delivery_charge < 30){
+                            totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
+                            f.actual_delivery_charge = 30;
+                        }
+                        return s + f.actual_delivery_charge  
+                    }, 0),
+                },
+                {
+                    "name": "Shree",
+                    "id":2381,
+                    "orderCount": shreeOrdersCount,
+                    "incentive": 0,
+                    "COD": shreeOrders.reduce((s, f) => s + f.total, 0),
+                    "Delivery Charges": shreeOrders.reduce(function(s, f) { 
                         if(f.actual_delivery_charge < 30){
                             totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
                             f.actual_delivery_charge = 30;
