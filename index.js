@@ -102,6 +102,26 @@ function transactionCalculate(currDate){
         console.log("Sameer Orders Count: "+ sameerOrdersCount);
         console.log("Total Incentives Distributed: "+ totalIncentives);
         console.log("Total Profit after deducting Incentive: "+ parseInt(totalStoreOrderValue) - parseInt(totalIncentives) );
+      
+
+        
+        // Krishna Total Online Orders. 1084
+        let krishnaOrders = _.where(result, {user_id: 885});
+        let krishnaOrdersCount = sameerOrders.length;
+
+
+        console.log("Krishna Orders Count: "+ krishnaOrdersCount);
+        console.log("Total Incentives Distributed: "+ totalIncentives);
+        console.log("Total Profit after deducting Incentive: "+ parseInt(totalStoreOrderValue) - parseInt(totalIncentives) );
+
+        let krishnaDeliveryCharges =  krishnaOrders.reduce(function(s, f) { 
+            if(f.actual_delivery_charge < 30){
+                f.actual_delivery_charge = 30;
+            }
+            return s + f.actual_delivery_charge  
+        }, 0)
+
+        console.log(sunilDeliveryCharges);
         let sunilDeliveryCharges =  sunilOrders.reduce(function(s, f) { 
             if(f.actual_delivery_charge < 30){
                 f.actual_delivery_charge = 30;
@@ -110,7 +130,6 @@ function transactionCalculate(currDate){
         }, 0)
 
         console.log(sunilDeliveryCharges);
-        
 
         resolve({
             "totalOrder": result.length,
@@ -189,6 +208,20 @@ function transactionCalculate(currDate){
                         return s + f.actual_delivery_charge  
                     }, 0),
                 },
+                {
+                    "name": "Krishna",
+                    "id":674,
+                    "orderCount": krishnaOrdersCount,
+                    "incentive": 0,
+                    "COD": krishnaOrders.reduce((s, f) => s + f.total, 0),
+                    "Delivery Charges": krishnaOrders.reduce(function(s, f) { 
+                        if(f.actual_delivery_charge < 30){
+                            totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
+                            f.actual_delivery_charge = 30;
+                        }
+                        return s + f.actual_delivery_charge  
+                    }, 0),
+                }
             ],
             "totalIncentives": totalIncentives,
             "totalOrderExpense": totalDeductionFromDeliveryCharges + totalIncentives
