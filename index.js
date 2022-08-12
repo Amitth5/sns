@@ -106,8 +106,8 @@ function transactionCalculate(currDate){
 
         
         // Krishna Total Online Orders. 1084
-        let krishnaOrders = _.where(result, {user_id: 885});
-        let krishnaOrdersCount = sameerOrders.length;
+        let krishnaOrders = _.where(result, {user_id: 674});
+        let krishnaOrdersCount = krishnaOrders.length;
 
 
         //Shree
