@@ -70,74 +70,41 @@ function transactionCalculate(currDate){
         // Sunil Total Online Orders. 1551
         let sunilOrders = _.where(result, {user_id: 1551});
         let sunilOrdersCount = sunilOrders.length
-        console.log("Sunil Orders Count: "+ sunilOrdersCount);
-        console.log("Sunil Incentive: "+  Math.floor(sunilOrdersCount/10) *50);
-        totalIncentives =  totalIncentives + Math.floor(sunilOrdersCount/20) *50;
+        totalIncentives = totalIncentives + getIncentive(sunilOrdersCount);
 
 
          // Subash Total Online Orders. 1697
         let subashOrders = _.where(result, {user_id: 1697});
         let subashOrdersCount = subashOrders.length;
-        console.log("Subash Orders Count: "+ subashOrdersCount);
-        console.log("Subash Incentive: "+  Math.floor(subashOrdersCount/20) *50);
+        totalIncentives =  totalIncentives + getIncentive(subashOrdersCount);
+
         
-        totalIncentives =  totalIncentives + Math.floor(subashOrdersCount/20) *50;
 
         // Shinde Total Online Orders. 1521
         let shindeOrders = _.where(result, {user_id: 1521});
         let shindeOrdersCount = shindeOrders.length;
-        console.log("Shinde Orders Count: "+ shindeOrdersCount);
 
 
         // Parmar Total Online Orders. 1084
         let parmarShetOrders = _.where(result, {user_id: 1084});
         let parmarShetOrdersCount = parmarShetOrders.length;
-        console.log("Parmar Shet Orders Count: "+ parmarShetOrdersCount);
-        console.log("Parmar Shet Incentive: "+  Math.floor(parmarShetOrdersCount/10) *50);
+        totalIncentives = totalIncentives + getIncentive(parmarShetOrdersCount);
+
         
 
         // sameer Total Online Orders. 1084
         let sameerOrders = _.where(result, {user_id: 885});
         let sameerOrdersCount = sameerOrders.length;
-        console.log("Sameer Orders Count: "+ sameerOrdersCount);
-        console.log("Total Incentives Distributed: "+ totalIncentives);
-        console.log("Total Profit after deducting Incentive: "+ parseInt(totalStoreOrderValue) - parseInt(totalIncentives) );
-      
+        totalIncentives =  totalIncentives + getIncentive(sameerOrdersCount);
 
-        
         // Krishna Total Online Orders. 1084
         let krishnaOrders = _.where(result, {user_id: 674});
         let krishnaOrdersCount = krishnaOrders.length;
 
-
         //Shree
         let shreeOrders = _.where(result, {user_id: 2381});
         let shreeOrdersCount = shreeOrders.length;
-        totalIncentives =  totalIncentives + Math.floor(shreeOrdersCount/20) *50;
-
-
-
-
-
-        console.log("Krishna Orders Count: "+ krishnaOrdersCount);
-        console.log("Total Incentives Distributed: "+ totalIncentives);
-        console.log("Total Profit after deducting Incentive: "+ parseInt(totalStoreOrderValue) - parseInt(totalIncentives) );
-
-        let krishnaDeliveryCharges =  krishnaOrders.reduce(function(s, f) { 
-            if(f.actual_delivery_charge < 30){
-                f.actual_delivery_charge = 30;
-            }
-            return s + f.actual_delivery_charge  
-        }, 0)
-
-        let sunilDeliveryCharges =  sunilOrders.reduce(function(s, f) { 
-            if(f.actual_delivery_charge < 30){
-                f.actual_delivery_charge = 30;
-            }
-            return s + f.actual_delivery_charge  
-        }, 0)
-
-        console.log(sunilDeliveryCharges);
+        totalIncentives =  totalIncentives + getIncentive(shreeOrdersCount);
 
         resolve({
             "totalOrder": result.length,
@@ -149,7 +116,7 @@ function transactionCalculate(currDate){
                 "name": "sunil",
                 "id":1551,
                 "orderCount": sunilOrdersCount,
-                "incentive": Math.floor(sunilOrdersCount/20) *50,
+                "incentive": getIncentive(sunilOrdersCount),
                 "COD": sunilOrders.reduce((s, f) => s + f.total, 0),
                 "Delivery Charges": sunilOrders.reduce(function(s, f) { 
                     if(f.actual_delivery_charge < 30){
@@ -191,7 +158,7 @@ function transactionCalculate(currDate){
                     "name": "Rahul Parmar",
                     "id":1084,
                     "orderCount": parmarShetOrdersCount,
-                    "incentive": Math.floor(parmarShetOrdersCount/20) *50,
+                    "incentive": getIncentive(parmarShetOrdersCount),
                     "COD": parmarShetOrders.reduce((s, f) => s + f.total, 0),
                     "Delivery Charges": parmarShetOrders.reduce(function(s, f) { 
                         if(f.actual_delivery_charge < 30){
@@ -206,7 +173,7 @@ function transactionCalculate(currDate){
                     "name": "Sameer Saase",
                     "id":885,
                     "orderCount": sameerOrdersCount,
-                    "incentive": 0,
+                    "incentive": getIncentive(sameerOrdersCount),
                     "COD": sameerOrders.reduce((s, f) => s + f.total, 0),
                     "Delivery Charges": sameerOrders.reduce(function(s, f) { 
                         if(f.actual_delivery_charge < 30){
@@ -234,7 +201,7 @@ function transactionCalculate(currDate){
                     "name": "Shree",
                     "id":2381,
                     "orderCount": shreeOrdersCount,
-                    "incentive": 0,
+                    "incentive": getIncentive(shreeOrdersCount),
                     "COD": shreeOrders.reduce((s, f) => s + f.total, 0),
                     "Delivery Charges": shreeOrders.reduce(function(s, f) { 
                         if(f.actual_delivery_charge < 30){
