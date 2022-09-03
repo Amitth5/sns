@@ -81,8 +81,8 @@ function transactionCalculate(currDate){
         
 
         // Shinde Total Online Orders. 1521
-        let shindeOrders = _.where(result, {user_id: 1521});
-        let shindeOrdersCount = shindeOrders.length;
+        let vinayOrders = _.where(result, {user_id: 97});
+        let vinayOrdersCount = vinayOrders.length;
 
 
         // Parmar Total Online Orders. 1084
@@ -102,9 +102,8 @@ function transactionCalculate(currDate){
         let krishnaOrdersCount = krishnaOrders.length;
 
         //Shree
-        let shreeOrders = _.where(result, {user_id: 2381});
-        let shreeOrdersCount = shreeOrders.length;
-        totalIncentives =  totalIncentives + getIncentive(shreeOrdersCount);
+        let amitOrders = _.where(result, {user_id: 96});
+        let amitOrdersCount = amitOrders.length;
 
         resolve({
             "totalOrder": result.length,
@@ -141,16 +140,12 @@ function transactionCalculate(currDate){
                     }, 0),
                 },
                 {
-                    "name": "Shinde",
-                    "id":1521,
-                    "orderCount": shindeOrdersCount,
+                    "name": "Vinay",
+                    "id":97,
+                    "orderCount": vinayOrdersCount,
                     "incentive": 0,
-                    "COD": shindeOrders.reduce((s, f) => s + f.total, 0),
-                    "Delivery Charges": shindeOrders.reduce(function(s, f) { 
-                        if(f.actual_delivery_charge < 30){
-                            totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
-                            f.actual_delivery_charge = 30;
-                        }
+                    "COD": vinayOrders.reduce((s, f) => s + f.total, 0),
+                    "Delivery Charges": vinayOrders.reduce(function(s, f) { 
                         return s + f.actual_delivery_charge  
                     }, 0),
                 },
@@ -190,24 +185,16 @@ function transactionCalculate(currDate){
                     "incentive": 0,
                     "COD": krishnaOrders.reduce((s, f) => s + f.total, 0),
                     "Delivery Charges": krishnaOrders.reduce(function(s, f) { 
-                        if(f.actual_delivery_charge < 30){
-                            totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
-                            f.actual_delivery_charge = 30;
-                        }
                         return s + f.actual_delivery_charge  
                     }, 0),
                 },
                 {
-                    "name": "Shree",
-                    "id":2381,
-                    "orderCount": shreeOrdersCount,
-                    "incentive": getIncentive(shreeOrdersCount),
-                    "COD": shreeOrders.reduce((s, f) => s + f.total, 0),
-                    "Delivery Charges": shreeOrders.reduce(function(s, f) { 
-                        if(f.actual_delivery_charge < 30){
-                            totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
-                            f.actual_delivery_charge = 30;
-                        }
+                    "name": "Amit",
+                    "id":96,
+                    "orderCount": amitOrdersCount,
+                    "incentive": getIncentive(amitOrdersCount),
+                    "COD": amitOrders.reduce((s, f) => s + f.total, 0),
+                    "Delivery Charges": amitOrders.reduce(function(s, f) { 
                         return s + f.actual_delivery_charge  
                     }, 0),
                 }
@@ -219,7 +206,6 @@ function transactionCalculate(currDate){
   
 });
 }
-
 
 
 function getStoresDetails(){
@@ -246,9 +232,24 @@ function getStoresDetails(){
 
 
 function getIncentive(orderCount){
-    if(orderCount<30){
-    return Math.floor(orderCount/20) *50
-    }else{
-       return 100; 
+    if(orderCount>=20 && orderCount <=30){
+    return 50;
+    }else if(orderCount>=30 && orderCount <40){
+        return 100;
+    }
+    else if(orderCount>=40 && orderCount <50){
+        return 200;
+    }
+    else if(orderCount>=50 && orderCount <60){
+        return 300;
+    }
+    else if(orderCount>=60 && orderCount <70){
+        return 400;
+    }
+    else if(orderCount>=70 && orderCount <80){
+        return 500;
+    }
+    else{
+       return 500; 
     }
 }
