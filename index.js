@@ -85,9 +85,10 @@ app.get('/transaction', function (req, res) {
 
 app.post('/inserttransaction', function (req, res) {
         console.log(req.body);
-
-    //console.log(req.body.postData['customer_name']);
-   // console.log(req.body.postData.customer_name);
+        var pData = JSON.stringify(req.body);
+        console.log(pData);
+    //console.log(pData.postData['customer_name']);
+   // console.log(pData.postData.customer_name);
 
     
  
