@@ -3,6 +3,7 @@
 
 var mysql = require('mysql');
 var _ = require('underscore');
+var bodyParser = require('body-parser');
 
 var con = mysql.createConnection({
     host: "184.168.125.140",
@@ -14,6 +15,12 @@ var con = mysql.createConnection({
 
   const express = require('express')
   var app = express();
+
+    // parse application/x-www-form-urlencoded
+    app.use(bodyParser.urlencoded({ extended: false }))
+
+    // parse application/json
+    app.use(bodyParser.json())
   app.set('views', './views');
   // set the view engine to ejs
   app.set('view engine', 'ejs');
