@@ -63,8 +63,26 @@ app.get('/stores', function (req, res) {
 
 
 app.get('/transaction', function (req, res) {
+    let currDate = new Date().toISOString().split('T')[0];
 
-    res.render('transaction');
+    if(req.query.date){
+        console.log('Req query found');
+        console.log(req.query);
+        currDate = req.query.date;
+    }
+
+    console.log(currDate);
+    transactionCalculate(currDate)
+    .then((data)=>{
+        res.render('transaction', {"data": data,"date": currDate})
+    })
+    .catch((err)=>{
+        res.send(err);
+    })
+});
+
+app.post('/inserttransaction', function (req, res) {
+    console.log(req.body);
 });
 
 app.listen(80)
