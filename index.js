@@ -221,7 +221,7 @@ function transactionCalculate(currDate){
                     "orderCount": rohitOrdersCount,
                     "incentive": getIncentive(rohitOrdersCount),
                     "COD": rohitOrders.reduce((s, f) => s + f.total, 0),
-                    "Delivery Charges": sunilOrders.reduce(function(s, f) { 
+                    "Delivery Charges": rohitOrders.reduce(function(s, f) { 
                         if(f.actual_delivery_charge < 30){
                             totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
                             f.actual_delivery_charge = 30;
