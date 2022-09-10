@@ -47,6 +47,18 @@ app.get('/stores', function (req, res) {
     .catch((err)=>{
         res.send(err)
     });
+});
+
+
+app.get('/stores', function (req, res) {
+
+    getStoresDetails()
+    .then((data)=>{
+        res.render('stores', {"data" : data})
+    })
+    .catch((err)=>{
+        res.send(err)
+    });
 })
 
 app.listen(80)
@@ -71,6 +83,11 @@ function transactionCalculate(currDate){
         let sunilOrders = _.where(result, {user_id: 1551});
         let sunilOrdersCount = sunilOrders.length
         totalIncentives = totalIncentives + getIncentive(sunilOrdersCount);
+
+        //Rohit Dhanke
+        let rohitOrders = _.where(result, {user_id: 2733});
+        let rohitOrdersCount = rohitOrders.length
+        totalIncentives = totalIncentives + getIncentive(rohitOrdersCount);
 
 
          // Subash Total Online Orders. 1697
@@ -197,7 +214,21 @@ function transactionCalculate(currDate){
                     "Delivery Charges": amitOrders.reduce(function(s, f) { 
                         return s + f.actual_delivery_charge  
                     }, 0),
-                }
+                },
+                {
+                    "name": "Rohit Dhanke",
+                    "id":2733,
+                    "orderCount": rohitOrdersCount,
+                    "incentive": getIncentive(rohitOrdersCount),
+                    "COD": rohitOrders.reduce((s, f) => s + f.total, 0),
+                    "Delivery Charges": sunilOrders.reduce(function(s, f) { 
+                        if(f.actual_delivery_charge < 30){
+                            totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
+                            f.actual_delivery_charge = 30;
+                        }
+                        return s + f.actual_delivery_charge;  
+                    }, 0)
+                    }
             ],
             "totalIncentives": totalIncentives,
             "totalOrderExpense": totalDeductionFromDeliveryCharges + totalIncentives
@@ -250,6 +281,6 @@ function getIncentive(orderCount){
         return 500;
     }
     else{
-       return 500; 
+       return 0; 
     }
 }
