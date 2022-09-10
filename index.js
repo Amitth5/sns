@@ -59,7 +59,13 @@ app.get('/stores', function (req, res) {
     .catch((err)=>{
         res.send(err)
     });
-})
+});
+
+
+app.get('/transaction', function (req, res) {
+
+    res.render('transaction');
+});
 
 app.listen(80)
 
