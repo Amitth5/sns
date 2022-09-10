@@ -83,10 +83,14 @@ app.get('/transaction', function (req, res) {
 
 app.post('/inserttransaction', function (req, res) {
     console.log(req.body);
-    res.send(req.body);
+    console.log('############################');
+    console.log(req);
  
     con.query("INSERT INTO order_details (delivery_id, customer_name, restaurant_name, amount, status, transaction_date) VALUES ('"+req.body.data.delivery_boy+"', '"+req.body.data.customer_name+"', '"+req.body.data.resto_name+"', '"+ req.body.data.amount +"', "+req.body.data.status+",'"+req.body.data.transaction_date+"'", function (err, result, fields) {
-   });
+        console.log(err);
+        console.log(result);
+    });
+
 });
 
 app.listen(80)
