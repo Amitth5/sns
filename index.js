@@ -18,17 +18,14 @@ var con = mysql.createConnection({
   // set the view engine to ejs
   app.set('view engine', 'ejs');
 
-app.get('/', function (req, res) {
+  app.get('/', function (req, res) {
 
     let currDate = new Date().toISOString().split('T')[0];
 
     if(req.query.date){
-        console.log('Req query found');
-        console.log(req.query);
         currDate = req.query.date;
     }
 
-    console.log(currDate);
     transactionCalculate(currDate)
     .then((data)=>{
         res.render('index', {"data": data,"date": currDate})
@@ -66,12 +63,10 @@ app.get('/transaction', function (req, res) {
     let currDate = new Date().toISOString().split('T')[0];
 
     if(req.query.date){
-        console.log('Req query found');
         console.log(req.query);
         currDate = req.query.date;
     }
 
-    console.log(currDate);
     transactionCalculate(currDate)
     .then((data)=>{
         res.render('transaction', {"data": data,"date": currDate})
@@ -82,14 +77,14 @@ app.get('/transaction', function (req, res) {
 });
 
 app.post('/inserttransaction', function (req, res) {
-    console.log(req.body.delivery_boy);
+    console.log(req.body);
     console.log('############################');
     console.log(req);
  
-    con.query("INSERT INTO order_details (delivery_id, customer_name, restaurant_name, amount, status, transaction_date) VALUES ('"+req.body.delivery_boy+"', '"+req.body.customer_name+"', '"+req.body.resto_name+"', '"+ req.body.amount +"', "+req.body.status+",'"+req.body.transaction_date+"'", function (err, result, fields) {
-        console.log(err);
-        console.log(result);
-    });
+    // con.query("INSERT INTO order_details (delivery_id, customer_name, restaurant_name, amount, status, transaction_date) VALUES ('"+req.body.data.delivery_boy+"', '"+req.body.data.customer_name+"', '"+req.body.data.resto_name+"', '"+ req.body.data.amount +"', "+req.body.data.status+",'"+req.body.data.transaction_date+"'", function (err, result, fields) {
+    //     console.log(err);
+    //     console.log(result);
+    // });
 
 });
 
@@ -102,7 +97,6 @@ con.connect(function(err) {
 function transactionCalculate(currDate){
     return new Promise((resolve, reject) => {
 
-        console.log("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = '"+ currDate +"' AND orderstatus_id = 5");
     con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = '"+ currDate +"' AND orderstatus_id = 5", function (err, result, fields) {
 
         if (err) throw err;
@@ -273,7 +267,6 @@ function transactionCalculate(currDate){
 
 function getStoresDetails(){
     return new Promise((resolve, reject) => {
-        console.log("Inside getStoreDetails Function");
             con.query("SELECT * FROM orders WHERE DATE(`created_at`) = CURDATE()-1  AND orderstatus_id = 5", function (err, result, fields) {
                 
                 let nisargOrders = _.where(result, {restaurant_id: 15});
