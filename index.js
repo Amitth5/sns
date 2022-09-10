@@ -83,6 +83,7 @@ app.get('/transaction', function (req, res) {
 
 app.post('/inserttransaction', function (req, res) {
     console.log(req.body);
+    res.send(req.body);
 });
 
 app.listen(80)
