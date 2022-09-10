@@ -21,6 +21,7 @@ var con = mysql.createConnection({
 
     // parse application/json
     app.use(bodyParser.json())
+
   app.set('views', './views');
   // set the view engine to ejs
   app.set('view engine', 'ejs');
@@ -84,7 +85,6 @@ app.get('/transaction', function (req, res) {
 });
 
 app.post('/inserttransaction', function (req, res) {
-    console.log(req.body);
     console.log('############################');
     console.log(req);
  
