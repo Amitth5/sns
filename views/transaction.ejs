@@ -82,7 +82,7 @@
             var transaction_date = $('#transaction_date').val();
             
             var postData = {"customer_name": customer_name, "resto_name": resto_name, "delivery_boy": delivery_boy, "status": status, "description": description, "transaction_date": transaction_date}
-            $.post( "http://3.94.170.142/inserttransaction",{postData}, function(res , statua) {
+            $.post( "http://3.94.170.142/inserttransaction",{"data":postData}, function(res , statua) {
             alert('a');
             console.log(res);
             console.log(status);  
