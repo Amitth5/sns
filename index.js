@@ -16,9 +16,11 @@ var con = mysql.createConnection({
   const express = require('express')
   var app = express();
 
-app.use(bodyParser.json({ type: 'application/*+json' }))
+    // parse application/x-www-form-urlencoded
+    app.use(bodyParser.urlencoded({ extended: false }))
 
-
+    // parse application/json
+    app.use(bodyParser.json())
   app.set('views', './views');
   // set the view engine to ejs
   app.set('view engine', 'ejs');
@@ -81,18 +83,14 @@ app.get('/transaction', function (req, res) {
     })
 });
 
-app.post('/inserttransaction', function (req, res) {
-        console.log(req.body);
-        console.log(typeof (req.body));
-    //console.log(pData.postData['customer_name']);
-   // console.log(pData.postData.customer_name);
-
-    
+app.get('/inserttransaction', function (req, res) {
+    console.log(req.query);
+    console.log(typeof (req.query));
  
-//     con.query("INSERT INTO order_details (delivery_id, customer_name, restaurant_name, amount, status, transaction_date) VALUES ('"+req.body.postData.delivery_boy+"', '"+req.body.postData.customer_name+"', '"+req.body.postData.resto_name+"', '"+ req.body.postData.amount +"', "+req.body.postData.status+",'"+req.body.postData.transaction_date+"'", function (err, result, fields) {
-//         console.log(err);
-//         console.log(result);
-//     });
+    // con.query("INSERT INTO order_details (delivery_id, customer_name, restaurant_name, amount, status, transaction_date) VALUES ('"+req.body.postData.delivery_boy+"', '"+req.body.postData.customer_name+"', '"+req.body.postData.resto_name+"', '"+ req.body.postData.amount +"', "+req.body.postData.status+",'"+req.body.postData.transaction_date+"'", function (err, result, fields) {
+    //     console.log(err);
+    //     console.log(result);
+    // });
 
 });
 
