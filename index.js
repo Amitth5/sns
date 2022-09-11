@@ -108,7 +108,7 @@ con.connect(function(err) {
 
 function getOrderDetails(currDate){
     return new Promise((resolve, reject) => {
-        con.query("SELECT * FROM order_details transaction_date = '"+ currDate +"'", function (err, result, fields) {
+        con.query("SELECT * FROM order_details  WHERE transaction_date = '"+ currDate +"'", function (err, result, fields) {
             if (err){ 
                 reject (err)
             };
@@ -179,7 +179,7 @@ function transactionCalculate(currDate){
 
         resolve({
             "totalOrder": result.length,
-            "totalOrderValue" : result.reduce((s, f) => s + f.total, 0),
+            "totalOrderValue" :Math.round(result.reduce((s, f) => s + f.total, 0)),
             "totalStoreOrderValue": totalStoreOrderValue,
             "totalDeliveryCharge": totalActualDeliveryCharge,
             "deliveryDetails": [
