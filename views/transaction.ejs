@@ -83,7 +83,7 @@
             var amount = $('#amount').val().trim();
             
             var postData = {"customer_name": customer_name, "resto_name": resto_name, "delivery_boy": delivery_boy, "status": status, "amount": amount, "description": description, "transaction_date": transaction_date}
-            $.get( "http://3.94.170.142/inserttransaction",{postData}, function(res , statua) {
+            $.get( "http://3.94.170.142/inserttransaction",{"data":postData}, function(res , statua) {
             alert('a');
             console.log(res);
             console.log(status);  
