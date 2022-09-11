@@ -45,7 +45,7 @@
 
 <div class="form-group">
     <label for="exampleInputEmail1">Transaction Date</label>
-    <input type="text" class="form-control" id="transaction_date"  placeholder="Date">
+    <input type="date" class="form-control" id="transaction_date"  placeholder="Date">
 </div>
 
 <div class="form-group">
@@ -67,9 +67,12 @@
 
 </div>
 
-<div class="container-fluid">
-    <h2> <%= data.totalOrderValue %> </h2>
+<div class="container fluid">
+    <h2>Total Sale: <%= data.totalOrderValue %> </h2>
+    <h2>Total Deduction: <%=  data.deliveryDeduction  %></h2>
 </div>
+
+<%= JSON.stringify(data) %>
 
 <script>
     $(document).ready(function(){
