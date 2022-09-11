@@ -83,7 +83,7 @@ app.get('/transaction', function (req, res) {
 
 app.post('/inserttransaction', function (req, res) {
         console.log(req.body);
-        console.log(type of (req.body));
+        console.log(typeof (req.body));
     //console.log(pData.postData['customer_name']);
    // console.log(pData.postData.customer_name);
 
