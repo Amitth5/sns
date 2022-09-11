@@ -73,10 +73,14 @@ app.get('/transaction', function (req, res) {
         console.log(req.query);
         currDate = req.query.date;
     }
-
-    transactionCalculate(currDate)
+    let transactionData;
+    getOrderDetails(currDate)
+    .then(function(transData){
+        transactionData = transData;
+        return  transactionCalculate(currDate);
+    })
     .then((data)=>{
-        res.render('transaction', {"data": data,"date": currDate})
+        res.render('transaction', {"data": data,"date": currDate, "transactionData": transactionData});
     })
     .catch((err)=>{
         res.send(err);
@@ -99,6 +103,21 @@ app.listen(80)
 
 con.connect(function(err) {
 });
+
+
+
+function getOrderDetails(currDate){
+    return new Promise((resolve, reject) => {
+        con.query("SELECT * FROM order_details transaction_date = '"+ currDate +"'", function (err, result, fields) {
+            if (err){ 
+                reject (err)
+            };
+            console.log(result);
+            resolve(result);
+        });
+
+    });
+}
 
 
 function transactionCalculate(currDate){
@@ -155,11 +174,14 @@ function transactionCalculate(currDate){
         let amitOrders = _.where(result, {user_id: 96});
         let amitOrdersCount = amitOrders.length;
 
+
+        let totalActualDeliveryCharge = result.reduce((s, f) => s + f.actual_delivery_charge, 0);
+
         resolve({
             "totalOrder": result.length,
             "totalOrderValue" : result.reduce((s, f) => s + f.total, 0),
             "totalStoreOrderValue": totalStoreOrderValue,
-            "totalDeliveryCharge": result.reduce((s, f) => s + f.actual_delivery_charge, 0),
+            "totalDeliveryCharge": totalActualDeliveryCharge,
             "deliveryDetails": [
                 {
                 "name": "sunil",
@@ -264,7 +286,8 @@ function transactionCalculate(currDate){
                     }
             ],
             "totalIncentives": totalIncentives,
-            "totalOrderExpense": totalDeductionFromDeliveryCharges + totalIncentives
+            "totalOrderExpense": totalDeductionFromDeliveryCharges + totalIncentives,
+            "deliveryDeduction" : totalDeductionFromDeliveryCharges + totalIncentives + totalActualDeliveryCharge
         })
   });
   
