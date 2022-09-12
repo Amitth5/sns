@@ -77,7 +77,7 @@
 <table>
     <% for(var i=0; i <= transactionData.length; i++) { %>
        <tr>
-         <td><%= JSON.stringify(transactionData[i]['restaurant_name']) %></td>
+         <td><%= transactionData[i].restaurant_name %></td>
 
        </tr>
     <% } %>
