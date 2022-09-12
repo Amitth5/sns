@@ -72,11 +72,10 @@
     <h2>Total Deduction: <%=  data.deliveryDeduction  %></h2>
 </div>
 
-<%= JSON.stringify(transactionData) %>
 
 
 <table>
-    <% for(var i=0; i < transactionData.length; i++) { %>
+    <% for(var i=0; i <= transactionData.length; i++) { %>
        <tr>
          <td><%= transactionData['resto_name']%></td>
          <td><%= transactionData['delivery_boy'] %></td>
