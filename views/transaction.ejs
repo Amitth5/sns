@@ -77,10 +77,7 @@
 <table>
     <% for(var i=0; i <= transactionData.length; i++) { %>
        <tr>
-         <td><%= transactionData[i]['resto_name']%></td>
-         <td><%= transactionData[i]['delivery_boy'] %></td>
-         <td><%= transactionData[i]['amount']%></td>
-         <td><%= transactionData[i]['status'] %></td>
+         <td><%= transactionData[i] %></td>
        </tr>
     <% } %>
 </table>
