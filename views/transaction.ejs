@@ -77,11 +77,8 @@
 <table>
     <% for(var i=0; i <= transactionData.length; i++) { %>
        <tr>
-         <td><%= transactionData[i]['restaurant_name']%></td>
-         <td><%= transactionData[i]['delivery_id'] %></td>
-         <td><%= transactionData[i]['amount']%></td>
-         <td><%= transactionData[i]['status'] %></td>
-         <td><%= transactionData[i]['transaction_date'] %></td>
+         <td><%= JSON.stringify(transactionData[i]['restaurant_name']) %></td>
+
        </tr>
     <% } %>
 </table>
