@@ -75,12 +75,13 @@
 
 
 <table>
-    <% for(var i=0; i <= transactionData.length; i++) { %>
-       <tr>
-         <td><%= transactionData[i].id %></td>
-
-       </tr>
-    <% } %>
+    
+    <% transactionData.forEach(function(product) { %>
+<div>
+   <%= product.id %>
+   <%= product.customer_name %>
+</div>
+<% }); %>
 </table>
 
 <script>
