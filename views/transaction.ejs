@@ -74,14 +74,33 @@
 
 
 
-<table>
-    
-    <% transactionData.forEach(function(product) { %>
-<div>
-   <%= product.id %>
-   <%= product.customer_name %>
-</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Delivery Partner</th>
+      <th scope="col">Restaurant Name</th>
+      <th scope="col">Customer Name</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  <% transactionData.forEach(function(product) { %>
+<tr>
+  <td> <%= product.delivery_id %> <td>
+   <td> <%= product.restaurant_name %> <td>
+
+  <td> <%= product.customer_name %> </td>
+  
+  <td> <%= product.amount %> </td>
+  
+    <td> <%= product.status %> <td>
+  
+</tr>
 <% }); %>
+  </tbody>
 </table>
 
 <script>
