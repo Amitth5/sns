@@ -88,7 +88,26 @@
   
   <% transactionData.forEach(function(product) { %>
 <tr>
-  <td scope="row"> <%= product.delivery_id %> </td>
+<% if(product.delivery_id == 1084){ %>
+  <td scope="row"> Rahul Parmar </td>
+ <% } else if (product.delivery_id == 1551){ %>  
+  <td scope="row"> Sunil </td>
+ <% } else if (product.delivery_id == 1697){ %>  
+   <td scope="row"> Subhash </td>
+  <% } else if (product.delivery_id == 885){ %>  
+     <td scope="row"> Sameer </td>
+  <% } else if (product.delivery_id == 674){ %>  
+     <td scope="row"> Krishna </td>
+  <% } else if (product.delivery_id == 96){ %>  
+     <td scope="row"> Amit </td>
+  <% } else { %>  
+    <td scope="row"> No One </td>
+  <% }  %>  
+
+
+     
+
+
   <td> <%= product.restaurant_name %> </td>
   <td> <%= product.customer_name %> </td>
   <td> <%= product.amount %> </td>
