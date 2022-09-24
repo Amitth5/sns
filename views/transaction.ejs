@@ -24,18 +24,18 @@
       </div>
       <div class="modal-body">
 
-        <div class="form-group col-sm-2">
+        <div class="form-group">
           <label for="exampleInputEmail1">Customer Name</label>
           <input type="text" class="form-control" id="customer_name"  placeholder="Customer Name">
       </div>
       
       
-      <div class="form-group col-sm-2">
+      <div class="form-group">
           <label for="exampleInputEmail1">Restaurant Name</label>
           <input type="text" class="form-control" id="resto_name"  placeholder="Restaurant Name">
       </div>
       
-      <div class="form-group col-sm-2">
+      <div class="form-group">
           <label for="exampleFormControlSelect1">Select Delivery Boy</label>
           <select class="form-control" id="delivery_boy">
             <option value="96">Amit</option>
@@ -50,17 +50,17 @@
           </select>
       </div>
       
-      <div class="form-group col-sm-2">
+      <div class="form-group">
           <label for="exampleInputEmail1">Amount</label>
           <input type="text" class="form-control" id="amount"  placeholder="Amount">
       </div>
       
-      <div class="form-group col-sm-2">
+      <div class="form-group">
           <label for="exampleInputEmail1">Transaction Date</label>
           <input type="date" class="form-control" id="transaction_date"  placeholder="Date">
       </div>
       
-      <div class="form-group col-sm-2">
+      <div class="form-group">
           <label for="exampleFormControlSelect1">Status</label>
           <select class="form-control" id="status">
             <option value="1">Pending</option>
@@ -70,7 +70,7 @@
           </select>
       </div>
       
-      <div class="form-group col-sm-2">
+      <div class="form-group">
           <label for="exampleFormControlTextarea1">Description</label>
           <textarea class="form-control" id="description" rows="3"></textarea>
       </div>
@@ -161,7 +161,6 @@
             
             var postData = {"customer_name": customer_name, "resto_name": resto_name, "delivery_boy": delivery_boy, "status": status, "amount": amount, "description": description, "transaction_date": transaction_date}
             $.get( "http://3.94.170.142/inserttransaction",{"data":postData}, function(res , statua) {
-            alert('a');
             console.log(res);
             console.log(status);  
         
@@ -170,3 +169,9 @@
         });
     });
 </script>
+
+<style>
+  .form-group{
+    margin-bottom: 15px;
+  }
+</style>
