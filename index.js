@@ -95,6 +95,7 @@ app.get('/inserttransaction', function (req, res) {
     con.query("INSERT INTO order_details (delivery_id, customer_name, restaurant_name, amount, status, transaction_date) VALUES ("+pData.delivery_boy+", '"+pData.customer_name+"', '"+pData.resto_name+"', '"+ pData.amount +"', "+pData.status+",'"+pData.transaction_date+"')", function (err, result, fields) {
         console.log(err);
         console.log(result);
+        res.send(result);
     });
 
 });
