@@ -77,6 +77,7 @@ app.get('/transaction', function (req, res) {
     getOrderDetails(currDate)
     .then(function(transData){
         transactionData = transData;
+        console.log(transactionData);
         return  transactionCalculate(currDate);
     })
     .then((data)=>{
@@ -112,7 +113,6 @@ function getOrderDetails(currDate){
             if (err){ 
                 reject (err)
             };
-            console.log(result);
             resolve(result);
         });
 
