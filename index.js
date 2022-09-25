@@ -126,15 +126,29 @@ function transactionCalculate(currDate, orderData){
 
         if (err) throw err;
         let pendingAmount = 0;
+        let amitAmount = 0;
+        let refundAmount = 0;
+        let offlineOrdersAmount = 0
+        let hotelPayment = 0;
         if(orderData != 0){
             let pendingOrders = _.where(orderData, {status: 1});
-            console.log('******************************');
-            console.log(pendingOrders);
             pendingAmount = pendingOrders.reduce((s, f) => s + parseInt(f.amount), 0);
-            console.log(pendingAmount);
+
+            let ordersPaymentAmit = _.where(orderData, {status: 5});
+            amitAmount = ordersPaymentAmit.reduce((s, f) => s + parseInt(f.amount), 0);
+
+            let refundOrders = _.where(orderData, {status: 4});
+            refundAmount = refundOrders.reduce((s, f) => s + parseInt(f.amount), 0);
+
+            let hotelOrdersPayment = _.where(orderData, {status: 3});
+            hotelPayment = hotelOrdersPayment.reduce((s, f) => s + parseInt(f.amount), 0);
+
+            let offlineOrdersPayment = _.where(orderData, {status: 2});
+            offlineOrdersAmount = offlineOrdersPayment.reduce((s, f) => s + parseInt(f.amount), 0);
+
         }
         let totalOrderValue = Math.round(result.reduce((s, f) => s + f.total, 0));
-        let rahulReleasePayment = totalOrderValue - pendingAmount;
+        let rahulReleasePayment = totalOrderValue - pendingAmount - amitAmount - refundAmount - hotelPayment + offlineOrdersAmount;
 
         let totalStoreOrderValue = result.reduce((s, f) => s + f.sub_total, 0);
         let totalIncentives = 0;
