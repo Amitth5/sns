@@ -128,7 +128,10 @@ function transactionCalculate(currDate, orderData){
         let pendingAmount = 0;
         if(orderData != 0){
             let pendingOrders = _.where(orderData, {status: 1});
+            console.log('******************************');
+            console.log(pendingOrders);
             pendingAmount = pendingOrders.reduce((s, f) => s + parseInt(f.amount), 0);
+            console.log(pendingAmount);
         }
         let totalOrderValue = Math.round(result.reduce((s, f) => s + f.total, 0));
         let rahulReleasePayment = totalOrderValue - pendingAmount;
