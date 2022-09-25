@@ -187,11 +187,14 @@
            if(customer_name.trim() != "" && resto_name.trim() != "" && transaction_date != "" && amount.trim() !=""){
             $.get( "http://3.94.170.142/inserttransaction",{"data":postData}, function(res , statua) {
               $('.alert-info').show();
-              $('#customer_name').val('')
-              $('#resto_name').val('')
-              $('#amount').val('')
+              $('#customer_name').val('');
+              $('#resto_name').val('');
+              $('#amount').val('');
+              $('.alert-danger').hide();
+
             });
           }else{
+            $('.alert-info').hide();
             $('.alert-danger').show();
           }
 
