@@ -67,6 +67,7 @@
             <option value="2">Offline Order</option>
             <option value="3">Hotel Payment</option>
             <option value="4">Refund</option>
+            <option value="5">Payment to Amit</option>
           </select>
       </div>
       
@@ -131,9 +132,13 @@
      <td scope="row"> Krishna </td>
   <% } else if (product.delivery_id == 96){ %>  
      <td scope="row"> Amit </td>
-  <% } else { %>  
-    <td scope="row"> No One </td>
-  <% }  %>  
+  <% } else if (product.delivery_id == 2887){ %>  
+      <td scope="row"> Patil Rahul </td>
+  <% } else if (product.delivery_id == 2805){ %>  
+        <td scope="row"> Bhagwan Dawane </td>
+  <% } else { %>   
+    <td scope="row">Other </td>
+  <% } %>   
 
 
      
@@ -142,7 +147,19 @@
   <td> <%= product.restaurant_name %> </td>
   <td> <%= product.customer_name %> </td>
   <td> <%= product.amount %> </td>
-   <td> <%= product.status %> </td>
+   <% if(product.status == 1){ %>
+    <td scope="row"> Pending </td>
+   <% } else if (product.status == 2){ %>  
+    <td scope="row"> Offline Order </td>
+   <% } else if (product.status == 3){ %>  
+    <td scope="row"> Hotel Payment </td>
+    <% } else if (product.status == 4){ %>  
+    <td scope="row"> Refund / Discount </td>
+    <% } else if (product.status == 5){ %>  
+    <td scope="row"> Payment to Amit </td>
+    <% }  %>  
+
+
 </tr>
 <% }); %>
   </tbody>
