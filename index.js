@@ -77,7 +77,7 @@ app.get('/transaction', function (req, res) {
     getOrderDetails(currDate)
     .then(function(transData){
         transactionData = transData;
-        return  transactionCalculate(currDate, transactionData);
+        return  transactionCalculate(currDate, transData);
     })
     .then((data)=>{
         res.render('transaction', {"data": data,"date": currDate, "transactionData": transactionData});
@@ -121,7 +121,7 @@ function getOrderDetails(currDate){
 
 function transactionCalculate(currDate, orderData){
     return new Promise((resolve, reject) => {
-    
+    console.log(orderData);
     con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = '"+ currDate +"' AND orderstatus_id = 5", function (err, result, fields) {
 
         if (err) throw err;
