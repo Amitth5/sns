@@ -122,16 +122,16 @@ function getOrderDetails(currDate){
 function transactionCalculate(currDate, orderData){
     return new Promise((resolve, reject) => {
     
-        if(orderData != 0){
-            let pendingOrders = _.where(orderData, {status: 1});
-            let pendingOrderAmount = pendingOrders.reduce((s, f) => s + parseInt(f.amount), 0);
-        }else{
-            let pendingOrderAmount = 0;
-        }
-
     con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = '"+ currDate +"' AND orderstatus_id = 5", function (err, result, fields) {
 
         if (err) throw err;
+        let pendingAmount = 0;
+        if(orderData != 0){
+            let pendingOrders = _.where(orderData, {status: 1});
+            pendingAmount = pendingOrders.reduce((s, f) => s + parseInt(f.amount), 0);
+        }
+        let totalOrderValue = Math.round(result.reduce((s, f) => s + f.total, 0));
+        let rahulReleasePayment = totalOrderValue - pendingAmount;
 
         let totalStoreOrderValue = result.reduce((s, f) => s + f.sub_total, 0);
         let totalIncentives = 0;
@@ -182,9 +182,7 @@ function transactionCalculate(currDate, orderData){
 
 
         let totalActualDeliveryCharge = result.reduce((s, f) => s + f.actual_delivery_charge, 0);
-        let totalOrderValue = Math.round(result.reduce((s, f) => s + f.total, 0));
 
-        let rahulReleasePayment = totalOrderValue - pendingOrderAmount;
 
         resolve({
             "totalOrder": result.length,
