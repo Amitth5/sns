@@ -178,6 +178,7 @@
       $('.alert-info').hide();
 
       var data = '<%= data %>';
+      data = JSON.parse(data);
       console.log(data);
       console.log(typeof (data));
 
