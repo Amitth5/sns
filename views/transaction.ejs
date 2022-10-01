@@ -177,12 +177,11 @@
       $('.alert-danger').hide();
       $('.alert-info').hide();
 
+      var data = '<%= data %>';
+      console.log(data);
+      console.log(typeof (data));
+
         $('#submit').click(function(){
-
-            var data = '<%= data %>';
-
-            console.log(data);
-            console.log(typeof (data));
             var customer_name = $('#customer_name').val();
             var resto_name = $('#resto_name').val();
             var delivery_boy = $('#delivery_boy').find(":selected").val()
