@@ -204,14 +204,14 @@
       
       if(dname !== '000'){
         var deliveryDetails = _.where(dDetails, {'name':dname});
-        var cod = deliveryDetails.COD;
+        var cod = deliveryDetails[0]['COD'];
         if(deliveryDetails.length > 0){
           transactionData =  _.where(transactionData, {'delivery_id':deliveryGuysDetails[dname]['id']});
         _.map(transactionData, function(obj){ 
           if(obj.status != 2 ){
-            cod = cod +  obj.amount;
+            cod = cod - parseInt(obj.amount);
           }else{
-            cod = cod +  obj.amount;
+            cod = cod +  parseInt(obj.amount);
           }
          });
 
