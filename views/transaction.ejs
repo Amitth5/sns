@@ -177,7 +177,7 @@
       $('.alert-danger').hide();
       $('.alert-info').hide();
 
-      var data = '<%= data %>';
+      var data = '<%- JSON.stringify(data)  %>';
       data = JSON.parse(data);
       console.log(data);
       console.log(typeof (data));
