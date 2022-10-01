@@ -68,7 +68,7 @@ app.get('/stores', function (req, res) {
 
 app.get('/transaction', function (req, res) {
     let currDate = new Date().toISOString().split('T')[0];
-    let dname = 'sunil'
+    let dname = '000'
 
     if(req.query.date){
         console.log(req.query);
