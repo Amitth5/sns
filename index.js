@@ -68,11 +68,18 @@ app.get('/stores', function (req, res) {
 
 app.get('/transaction', function (req, res) {
     let currDate = new Date().toISOString().split('T')[0];
+    let dname = 'sunil'
 
     if(req.query.date){
         console.log(req.query);
         currDate = req.query.date;
     }
+
+    if(req.query.dname){
+        dname = req.query.dname;
+    }
+
+
     let transactionData;
     getOrderDetails(currDate)
     .then(function(transData){
@@ -80,7 +87,7 @@ app.get('/transaction', function (req, res) {
         return  transactionCalculate(currDate, transData);
     })
     .then((data)=>{
-        res.render('transaction', {"data": data,"date": currDate, "transactionData": transactionData});
+        res.render('transaction', {"data": data,"date": currDate, "transactionData": transactionData, "dname": dname});
     })
     .catch((err)=>{
         res.send(err);
