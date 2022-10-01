@@ -103,10 +103,15 @@
 </div>
 
 <div class="container fluid" style="margin-top:20px; margin-left:10%">
+  <% if(dname == '000') { %>
     <h2>Total Sale: <%= data.totalOrderValue %> </h2>
     <h2>Total Delivery Deduction Deduction: <%=  data.deliveryDeduction  %></h2>
     <h2 style="color:green"> Rahul Release Payment: <%= data.rahulReleasePayment  -  data.deliveryDeduction %> </h2>
+  <% } %>
 
+  <% if(dname == 'sunil') { %>
+    <h2>Total COD: <%= data.deliveryDetails[0]['COD'] %> </h2>
+  <% } %>
 
 
 
@@ -145,9 +150,7 @@
   <% } %>   
 
 
-     
-
-
+  
   <td> <%= product.restaurant_name %> </td>
   <td> <%= product.customer_name %> </td>
   <td> <%= product.amount %> </td>
@@ -175,6 +178,11 @@
       $('.alert-info').hide();
 
         $('#submit').click(function(){
+
+            var data = '<%= data %>';
+
+            console.log(data);
+            console.log(typeof (data));
             var customer_name = $('#customer_name').val();
             var resto_name = $('#resto_name').val();
             var delivery_boy = $('#delivery_boy').find(":selected").val()
@@ -197,8 +205,6 @@
             $('.alert-info').hide();
             $('.alert-danger').show();
           }
-
-
         });
     });
 </script>
