@@ -183,11 +183,11 @@
       var transactionData = '<%- JSON.stringify(transactionData)  %>';
       var dname = '<%- dname %>';
       console.log(dname);
-      var dDetails = data.deliveryDetails;
-      console.log(dDetails);
-
       data = JSON.parse(data);
       console.log(data);
+      var dDetails = data.deliveryDetails;
+      console.log(dDetails);
+      
       if(dname !== '000'){
         var deliveryDetails = _.where(dDetails, {'name':dname});
         console.log(deliveryDetails);
