@@ -115,7 +115,11 @@
     <h2>Total COD: <%= data.deliveryDetails[0]['COD'] %> </h2>
   <% } %>
 
+<div class="deliveryGuyDetails">
+  <h2>Delivery Partner: <span id="deliveryName"></span></h2>
+  <h2>COD: <span id="deliveryCod"></span></h2>
 
+</div>
 
 <table class="table">
   <thead>
@@ -179,18 +183,40 @@
       $('.alert-danger').hide();
       $('.alert-info').hide();
 
+      var deliveryGuysDetails= {
+      "sunil":{
+                "name": "sunil",
+                "id":1551
+      }
+    };
+
       var data = '<%- JSON.stringify(data)  %>';
       var transactionData = '<%- JSON.stringify(transactionData)  %>';
       var dname = '<%- dname %>';
       console.log(dname);
       data = JSON.parse(data);
+      transactionData = JSON.parse(transactionData);
       console.log(data);
       console.log(transactionData);
+      
       var dDetails = data.deliveryDetails;
       console.log(dDetails);
       
       if(dname !== '000'){
         var deliveryDetails = _.where(dDetails, {'name':dname});
+        var cod = deliveryDetails.COD;
+
+        _.map(transactionData, function(obj){ 
+          if(obj.status != 2 ){
+            cod = cod +  obj.amount;
+          }else{
+            cod = cod +  obj.amount;
+          }
+         });
+
+         $('#deliveryName').html(dname);
+         $('#deliveryCod').html(cod);
+
         console.log(deliveryDetails);
       }
 
