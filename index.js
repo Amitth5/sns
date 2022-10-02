@@ -251,7 +251,7 @@ function transactionCalculate(currDate, orderData){
                     }, 0),
                 },
                 {
-                    "name": "Vinay",
+                    "name": "vinay",
                     "id":97,
                     "orderCount": vinayOrdersCount,
                     "incentive": 0,
@@ -261,7 +261,7 @@ function transactionCalculate(currDate, orderData){
                     }, 0),
                 },
                 {
-                    "name": "Rahul Parmar",
+                    "name": "rahulparmar",
                     "id":1084,
                     "orderCount": parmarShetOrdersCount,
                     "incentive": getIncentive(parmarShetOrdersCount),
@@ -276,7 +276,7 @@ function transactionCalculate(currDate, orderData){
                 },
 
                 {
-                    "name": "Sameer Saase",
+                    "name": "sameer",
                     "id":885,
                     "orderCount": sameerOrdersCount,
                     "incentive": getIncentive(sameerOrdersCount),
@@ -290,7 +290,7 @@ function transactionCalculate(currDate, orderData){
                     }, 0),
                 },
                 {
-                    "name": "Krishna",
+                    "name": "krishna",
                     "id":674,
                     "orderCount": krishnaOrdersCount,
                     "incentive": 0,
@@ -300,7 +300,7 @@ function transactionCalculate(currDate, orderData){
                     }, 0),
                 },
                 {
-                    "name": "Amit",
+                    "name": "amit",
                     "id":96,
                     "orderCount": amitOrdersCount,
                     "incentive": getIncentive(amitOrdersCount),
@@ -310,7 +310,7 @@ function transactionCalculate(currDate, orderData){
                     }, 0),
                 },
                 {
-                    "name": "Bhagwan Dawane",
+                    "name": "bhagwan",
                     "id":2805,
                     "orderCount": rohitOrdersCount,
                     "incentive": getIncentive(rohitOrdersCount),
@@ -324,7 +324,7 @@ function transactionCalculate(currDate, orderData){
                     }, 0)
                 },
                 {
-                    "name": "Rahul Patil",
+                    "name": "rahulpatil",
                     "id":2805,
                     "orderCount": rahulPOrders,
                     "incentive": getIncentive(rahulPOrdersCount),
