@@ -136,6 +136,8 @@
   <tbody>
   
   <% transactionData.forEach(function(product) { %>
+    
+    <% if(dId == product.delivery_id && dId != '000'){ %>
 <tr>
 <% if(product.delivery_id == 1084){ %>
   <td scope="row"> Rahul Parmar </td>
@@ -176,6 +178,7 @@
 
 
 </tr>
+<% } %>
 <% }); %>
   </tbody>
 </table>
@@ -195,7 +198,7 @@
         "id":1697,
       },
       "bhagwan":{
-        "name": "Bhagwan",
+        "name":"Bhagwan",
         "id":2005,
       },
       "sameer":{
