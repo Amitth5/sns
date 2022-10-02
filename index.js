@@ -69,6 +69,7 @@ app.get('/stores', function (req, res) {
 app.get('/transaction', function (req, res) {
     let currDate = new Date().toISOString().split('T')[0];
     let dname = '000'
+    let dId = '000';
 
     if(req.query.date){
         console.log(req.query);
@@ -79,6 +80,10 @@ app.get('/transaction', function (req, res) {
         dname = req.query.dname;
     }
 
+    if(req.query.dId){
+        dId = req.query.dId;
+    }
+
 
     let transactionData;
     getOrderDetails(currDate)
@@ -87,7 +92,7 @@ app.get('/transaction', function (req, res) {
         return  transactionCalculate(currDate, transData);
     })
     .then((data)=>{
-        res.render('transaction', {"data": data,"date": currDate, "transactionData": transactionData, "dname": dname});
+        res.render('transaction', {"data": data,"date": currDate, "transactionData": transactionData, "dname": dname, "dId": dId});
     })
     .catch((err)=>{
         res.send(err);
