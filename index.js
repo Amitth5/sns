@@ -130,7 +130,7 @@ function getOrderDetails(currDate){
 function transactionCalculate(currDate, orderData){
     return new Promise((resolve, reject) => {
     console.log(orderData);
-    con.query("SELECT * FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = '"+ currDate +"' AND orderstatus_id = 5", function (err, result, fields) {
+    con.query("SELECT orders.total, orders.sub_total, accept_deliveries.user_id FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) = '"+ currDate +"' AND orderstatus_id = 5", function (err, result, fields) {
 
         if (err) throw err;
         let pendingAmount = 0;
