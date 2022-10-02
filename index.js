@@ -168,9 +168,15 @@ function transactionCalculate(currDate, orderData){
         totalIncentives = totalIncentives + getIncentive(sunilOrdersCount);
 
         //Rohit Dhanke
-        let rohitOrders = _.where(result, {user_id: 2733});
+        let rohitOrders = _.where(result, {user_id: 2805});
         let rohitOrdersCount = rohitOrders.length
         totalIncentives = totalIncentives + getIncentive(rohitOrdersCount);
+
+
+        //Rahul Patil
+        let rahulPOrders = _.where(result, {user_id: 2887});
+        let rahulPOrdersCount = rahulPOrders.length
+        totalIncentives = totalIncentives + getIncentive(rahulPOrdersCount);
 
 
          // Subash Total Online Orders. 1697
@@ -304,8 +310,8 @@ function transactionCalculate(currDate, orderData){
                     }, 0),
                 },
                 {
-                    "name": "Rohit Dhanke",
-                    "id":2733,
+                    "name": "Bhagwan Dawane",
+                    "id":2805,
                     "orderCount": rohitOrdersCount,
                     "incentive": getIncentive(rohitOrdersCount),
                     "COD": rohitOrders.reduce((s, f) => s + f.total, 0),
@@ -316,7 +322,21 @@ function transactionCalculate(currDate, orderData){
                         }
                         return s + f.actual_delivery_charge;  
                     }, 0)
-                    }
+                },
+                {
+                    "name": "Rahul Patil",
+                    "id":2805,
+                    "orderCount": rahulPOrders,
+                    "incentive": getIncentive(rahulPOrdersCount),
+                    "COD": rahulPOrders.reduce((s, f) => s + f.total, 0),
+                    "Delivery Charges": rahulPOrders.reduce(function(s, f) { 
+                        if(f.actual_delivery_charge < 30){
+                            totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
+                            f.actual_delivery_charge = 30;
+                        }
+                        return s + f.actual_delivery_charge;  
+                    }, 0)
+                }
             ],
             "totalIncentives": totalIncentives,
             "totalOrderExpense": totalDeductionFromDeliveryCharges + totalIncentives,
