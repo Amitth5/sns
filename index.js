@@ -333,7 +333,7 @@ function transactionCalculate(currDate, orderData){
                 {
                     "name": "rahulpatil",
                     "id":2887,
-                    "orderCount": rahulPOrders,
+                    "orderCount": rahulPOrdersCount,
                     "incentive": getIncentive(rahulPOrdersCount),
                     "COD": rahulPOrders.reduce((s, f) => s + f.total, 0),
                     "Delivery Charges": rahulPOrders.reduce(function(s, f) { 
