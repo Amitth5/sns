@@ -172,9 +172,17 @@ function transactionCalculate(currDate, orderData){
             let offlineOrdersPayment = _.where(orderData, {status: 2});
             offlineOrdersAmount = offlineOrdersPayment.reduce((s, f) => s + parseInt(f.amount), 0);
 
+
+            let cancelledOrdersPayment = _.where(orderData, {status: 6});
+            cancelOrdersAmount = cancelledOrdersPayment.reduce((s, f) => s + parseInt(f.amount), 0);
+
+
+            let pendingReceivedOrdersPayment = _.where(orderData, {status: 7});
+            pendingReceivedeOrdersAmount = pendingReceivedOrdersPayment.reduce((s, f) => s + parseInt(f.amount), 0);
+
         }
         let totalOrderValue = Math.round(result.reduce((s, f) => s + f.total, 0));
-        let rahulReleasePayment = totalOrderValue - pendingAmount - amitAmount - refundAmount - hotelPayment + offlineOrdersAmount;
+        let rahulReleasePayment = totalOrderValue - pendingAmount - amitAmount - refundAmount - hotelPayment - cancelOrdersAmount - pendingReceivedeOrdersAmount + offlineOrdersAmount;
 
         let totalStoreOrderValue = result.reduce((s, f) => s + f.sub_total, 0);
         let totalIncentives = 0;
