@@ -112,6 +112,17 @@ app.get('/inserttransaction', function (req, res) {
 
 });
 
+app.get('/deletetransaction', function (req, res) {
+    console.log(req.query);
+    let id = req.query.id;
+    console.log(id);
+    con.query("DELETE FROM order_details WHERE id="+id, function (err, result, fields) {
+        console.log(err);
+        console.log(result);
+        res.send(result);
+    });
+});
+
 app.listen(80)
 
 con.connect(function(err) {
