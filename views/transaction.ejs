@@ -105,7 +105,7 @@
 
 </div>
 
-<div class="container fluid" style="margin-top:20px; margin-left:10%">
+<div class="container fluid" style="margin-top:20px;">
   <% if(dname == '000') { %>
     <h2>Total Sale: <%= data.totalOrderValue %> </h2>
     <h2>Total Delivery Deduction Deduction: <%=  data.deliveryDeduction  %></h2>
@@ -126,11 +126,12 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Delivery Partner</th>
-      <th scope="col">Restaurant Name</th>
-      <th scope="col">Customer Name</th>
-      <th scope="col">Amount</th>
+      <th scope="col">Del P.</th>
+      <th scope="col">Resto</th>
+      <th scope="col">Customer</th>
+      <th scope="col">Amt</th>
       <th scope="col">Status</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -175,6 +176,7 @@
     <td scope="row"> Payment to Amit </td>
     <% }  %>  
 
+   <td> <i class="bi bi-trash"></i> </td>
 
 </tr>
 <% } %>
