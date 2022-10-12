@@ -163,19 +163,19 @@
   <td> <%= product.customer_name %> </td>
   <td> <%= product.amount %> </td>
    <% if(product.status == 1){ %>
-    <td scope="row"> Pending </td>
+    <td scope="row" class="status"> Pending </td>
    <% } else if (product.status == 2){ %>  
-    <td scope="row"> Offline Order </td>
+    <td scope="row" class="status"> Offline Order </td>
    <% } else if (product.status == 3){ %>  
-    <td scope="row"> Hotel Payment </td>
+    <td scope="row" class="status"> Hotel Payment </td>
     <% } else if (product.status == 4){ %>  
-    <td scope="row"> Refund / Discount </td>
+    <td scope="row" class="status"> Refund / Discount </td>
     <% } else if (product.status == 5){ %>  
-    <td scope="row"> Payment to Amit </td>
+    <td scope="row" class="status"> Payment to Amit </td>
     <% } else if (product.status == 6){ %>  
-      <td scope="row"> Order Cancelled </td>
+      <td scope="row" class="status"> Order Cancelled </td>
     <% } else if (product.status == 7){ %>  
-        <td scope="row"> Pending Received </td>
+        <td scope="row" class="status"> Pending Received </td>
     <% }  %> 
    <td>  <svg class="deleteRecord" data-id="<%= product.id %>" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -284,6 +284,7 @@
           $.get( "http://3.94.170.142/deletetransaction",{"id":id}, function(res , status) {
             _this.closest('tr').hide();
             _this.closest('tr').show();
+            _this.closest('tr').find('.status').html('Pending Received').css("font-weight", "500");
           });
         });
     });
