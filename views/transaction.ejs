@@ -235,11 +235,11 @@
           transactionData =  _.where(transactionData, {'delivery_id':deliveryGuysDetails[dname]['id']});
         _.map(transactionData, function(obj){ 
           if(obj.status != 2 ){
-            if(obj.status != 7){
+            if(obj.status != 7 && obj.status != '7'){
             cod = cod - parseInt(obj.amount);
             }
           }else{
-            if(obj.status != 7){
+            if(obj.status != 7 && obj.status != '7'){
             cod = cod +  parseInt(obj.amount);
             }
           }
