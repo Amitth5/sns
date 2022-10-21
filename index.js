@@ -157,6 +157,7 @@ function transactionCalculate(currDate, orderData){
         let offlineOrdersAmount = 0
         let hotelPayment = 0;
         let cancelOrdersAmount = 0;
+        let pendingReceivedeOrdersAmount = 0;
         if(orderData != 0){
             let pendingOrders = _.where(orderData, {status: 1});
             pendingAmount = pendingOrders.reduce((s, f) => s + parseInt(f.amount), 0);
