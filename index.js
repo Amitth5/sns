@@ -123,7 +123,7 @@ app.get('/deletetransaction', function (req, res) {
     });
 });
 
-app.listen(8080)
+app.listen(80)
 
 con.connect(function(err) {
 });
@@ -156,6 +156,7 @@ function transactionCalculate(currDate, orderData){
         let refundAmount = 0;
         let offlineOrdersAmount = 0
         let hotelPayment = 0;
+        let cancelOrdersAmount = 0;
         if(orderData != 0){
             let pendingOrders = _.where(orderData, {status: 1});
             pendingAmount = pendingOrders.reduce((s, f) => s + parseInt(f.amount), 0);
