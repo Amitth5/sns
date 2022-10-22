@@ -42,21 +42,15 @@ var con = mysql.createConnection({
     })
 })
 
-app.get('/stores', function (req, res) {
 
-    getStoresDetails()
-    .then((data)=>{
-        res.render('stores', {"data" : data})
-    })
-    .catch((err)=>{
-        res.send(err)
-    });
-});
 
 
 app.get('/stores', function (req, res) {
-
-    getStoresDetails()
+    let currDate = new Date().toISOString().split('T')[0];
+    if(req.query.date){
+        currDate = req.query.date;
+    }
+    getStoresDetails(currDate)
     .then((data)=>{
         res.render('stores', {"data" : data})
     })
@@ -376,9 +370,9 @@ function transactionCalculate(currDate, orderData){
 }
 
 
-function getStoresDetails(){
+function getStoresDetails(currDate){
     return new Promise((resolve, reject) => {
-            con.query("SELECT * FROM orders WHERE DATE(`created_at`) = CURDATE()-1  AND orderstatus_id = 5", function (err, result, fields) {
+            con.query("SELECT * FROM orders WHERE DATE(`created_at`) = "+ currDate +"  AND orderstatus_id = 5", function (err, result, fields) {
                 
                 let nisargOrders = _.where(result, {restaurant_id: 15});
                 let nisargOrderDetils = nisargOrders.reduce(function(s, f){ 
