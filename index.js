@@ -374,7 +374,7 @@ function transactionCalculate(currDate, orderData){
 function getStoresDetails(currDate){
     return new Promise((resolve, reject) => {
         console.log("SELECT * FROM orders WHERE DATE(`created_at`) = "+ currDate +"  AND orderstatus_id = 5");
-            con.query("SELECT * FROM orders WHERE DATE(`created_at`) = "+ currDate +"  AND orderstatus_id = 5", function (err, result, fields) {
+            con.query("SELECT * FROM orders WHERE DATE(`created_at`) = '"+ currDate +"'  AND orderstatus_id = 5", function (err, result, fields) {
                 
                 let nisargOrders = _.where(result, {restaurant_id: 15});
                 let nisargOrderDetils = nisargOrders.reduce(function(s, f){ 
