@@ -196,10 +196,10 @@ function transactionCalculate(currDate, orderData){
         totalIncentives = totalIncentives + getIncentive(rohitOrdersCount);
 
 
-        //Rahul Patil
-        let rahulPOrders = _.where(result, {user_id: 2887});
-        let rahulPOrdersCount = rahulPOrders.length
-        totalIncentives = totalIncentives + getIncentive(rahulPOrdersCount);
+        //Satish
+        let satishOrders = _.where(result, {user_id: 3183});
+        let satishOrdersCount = satishOrders.length
+        totalIncentives = totalIncentives + getIncentive(satishOrdersCount);
 
 
          // Subash Total Online Orders. 1697
@@ -230,7 +230,7 @@ function transactionCalculate(currDate, orderData){
         let krishnaOrders = _.where(result, {user_id: 674});
         let krishnaOrdersCount = krishnaOrders.length;
 
-        //Shree
+        //Amit
         let amitOrders = _.where(result, {user_id: 96});
         let amitOrdersCount = amitOrders.length;
 
@@ -347,12 +347,12 @@ function transactionCalculate(currDate, orderData){
                     }, 0)
                 },
                 {
-                    "name": "rahulpatil",
-                    "id":2887,
-                    "orderCount": rahulPOrdersCount,
-                    "incentive": getIncentive(rahulPOrdersCount),
-                    "COD": rahulPOrders.reduce((s, f) => s + f.total, 0),
-                    "Delivery Charges": rahulPOrders.reduce(function(s, f) { 
+                    "name": "satish",
+                    "id":3183,
+                    "orderCount": satishOrdersCount,
+                    "incentive": getIncentive(satishOrdersCount),
+                    "COD": satishOrders.reduce((s, f) => s + f.total, 0),
+                    "Delivery Charges": satishOrders.reduce(function(s, f) { 
                         if(f.actual_delivery_charge < 30){
                             totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
                             f.actual_delivery_charge = 30;
