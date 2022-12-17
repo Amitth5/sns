@@ -25,7 +25,7 @@ var con = mysql.createConnection({
   // set the view engine to ejs
   app.set('view engine', 'ejs');
 
-  app.get('/', function (req, res) {
+  app.get('/logs', function (req, res) {
 
     let currDate = new Date().toISOString().split('T')[0];
 
