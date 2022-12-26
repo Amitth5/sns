@@ -383,9 +383,17 @@ function getStoresDetails(currDate){
                     let actualPriceToPay = priceAfterComission + (5/100)*f.sub_total;
                     return s + actualPriceToPay;               
                 }, 0);
+                
+                let nisargSnacksOrders = _.where(result, {restaurant_id: 67});
+                let nisargSnacksOrderDetils = nisargSnacksOrders.reduce(function(s, f){ 
+                    let _pricePreGst = f.sub_total - (10/100)*f.sub_total;
+                    let _priceAfterComission = _pricePreGst - (10/100)*_pricePreGst;
+                    let _actualPriceToPay = _priceAfterComission + (5/100)*f.sub_total;
+                    return s + _actualPriceToPay;               
+                }, 0);
 
                 resolve([
-                    {"sale":nisargOrderDetils,
+                    {"sale":nisargOrderDetils + nisargSnacksOrderDetils,
                     "orderCount": nisargOrders.length,
                     "profit": nisargOrders.reduce((s, f) => s + f.sub_total, 0) - nisargOrderDetils
                     }]);
