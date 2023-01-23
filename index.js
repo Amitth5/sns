@@ -288,7 +288,7 @@ function transactionCalculate(currDate, orderData){
                     "id":1084,
                     "orderCount": parmarShetOrdersCount,
                     "incentive": getIncentive(parmarShetOrdersCount),
-                    "COD": parmarShetOrders.reduce((s, f) => s + f.total, 0),
+                    "COD": parmarShetOrders.reduce((s, f) => s + f.total, 0) - 10,
                     "Delivery Charges": parmarShetOrders.reduce(function(s, f) { 
                         if(f.actual_delivery_charge < 30){
                             totalDeductionFromDeliveryCharges =  totalDeductionFromDeliveryCharges + (30- f.actual_delivery_charge);
