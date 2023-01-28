@@ -383,7 +383,7 @@ function transactionCalculate(currDate, orderData){
 function transactionCalculatePeriod([from_date,to_date], orderData){
     return new Promise((resolve, reject) => {
     console.log(orderData);
-    con.query("SELECT orders.total, orders.sub_total, orders.actual_delivery_charge, accept_deliveries.user_id FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) <= '"+ from_date +"' AND DATE(orders.`created_at`) >= '"+ to_date +"' orderstatus_id = 5", function (err, result, fields) {
+    con.query("SELECT orders.total, orders.sub_total, orders.actual_delivery_charge, accept_deliveries.user_id FROM orders INNER JOIN accept_deliveries ON orders.id = accept_deliveries.order_id WHERE DATE(orders.`created_at`) <= '"+ from_date +"' AND DATE(orders.`created_at`) >= '"+ to_date +"' AND orderstatus_id = 5", function (err, result, fields) {
 
         if (err) throw err;
 
